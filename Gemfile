@@ -39,3 +39,4 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'mongoid', '~> 4.0.0'
+gem 'websocket-rails'

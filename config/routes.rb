@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  match ':trap_id', to: 'requests#create', via: :all
+  match ':trap_id', to: 'requests#create', via: :all, constraints: lambda { |req| req.params[:trap_id] != 'websocket' }
   get ':trap_id/requests' => 'requests#index', as: :requests
   get ':trap_id/requests/:id' => 'requests#show', as: :request
 

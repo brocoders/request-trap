@@ -1,4 +1,7 @@
-<h1>Listing requests</h1>
+<script type="text/javascript">
+  window.trap_id = '<%=params[:trap_id]%>';
+</script>
+<h1><%=params[:trap_id]%></h1>
 
 <table>
   <thead>
@@ -11,15 +14,7 @@
 
   <tbody>
     <% @requests.each do |request| %>
-      <tr>
-        <td><%= request.trap_id %></td>
-        <td><ul>
-          <% request.data.each do |k, v| %>
-            <li><b><%=k%></b>:<%=v%> </li>
-          <% end %>
-        </ul></td>
-        <td><%= link_to 'Show', request_path(request.trap_id, request.id) %></td>
-      </tr>
+      <%= render partial: 'requests/request', locals: {request: request} %>
     <% end %>
   </tbody>
 </table>

@@ -20,10 +20,11 @@ class RequestsController < ApplicationController
 
     respond_to do |format|
       if @request.save
-        format.html { redirect_to @request, notice: 'Request was successfully created.' }
+        WebsocketRails[@request.trap_id].trigger 'new', render_to_string(partial: 'requests/request', locals: {request: @request})
+        format.html { redirect_to request_path(@request.trap_id, @request.id), notice: 'Request was successfully created.' }
         format.json { render :show, status: :created, location: @request }
       else
-        format.html { redirect_to @request, notice: 'Request wasn\'t created.' }
+        format.html { redirect_to request_path(@request.trap_id, @request.id), notice: 'Request wasn\'t created.' }
         format.json { render json: @request.errors, status: :unprocessable_entity }
       end
     end
